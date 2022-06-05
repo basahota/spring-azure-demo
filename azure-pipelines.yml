@@ -44,5 +44,5 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'zhangchl008acr'
-        repository: '$(imageProject)/$(myApp)'
+        repository: '$(imageProject)/$(myApp):$(tag)'
         command: 'push'
