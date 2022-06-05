@@ -76,7 +76,7 @@ stages:
           - task: Bash@3
             inputs:
               targetType: 'inline'
-              script: 'find ./ -name deployment.yml'
+              script: 'pwd && ls'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
@@ -84,8 +84,8 @@ stages:
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               manifests: |
-                ./s/manifests/deployment.yml
-                ./s/manifests/service.yml
+                $(Pipeline.Workspace)/manifests/deployment.yml
+                $(Pipeline.Workspace)/manifests/service.yml
               containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
 
