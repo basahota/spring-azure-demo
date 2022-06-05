@@ -54,11 +54,8 @@ stages:
         containerRegistry: 'zhangchl008acr'
         repository: '$(imageProject)/$(myApp)'
         command: 'push'
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Pipeline.Workspace)/'
-        artifact: 'manifests'
-        publishLocation: 'pipeline'
+    - upload: manifests
+      artifact: manifests
 - stage: Deploy
   displayName: Deploy stage
   variables:
@@ -75,11 +72,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              buildType: 'current'
-              artifactName: 'manifests'
-              targetPath: '$(Pipeline.Workspace)/manifests'
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
