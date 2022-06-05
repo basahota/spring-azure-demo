@@ -56,7 +56,7 @@ stages:
         command: 'push'
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/s/'
+        targetPath: '$(Pipeline.Workspace)/'
         artifact: 'manifests'
         publishLocation: 'pipeline'
 - stage: Deploy
@@ -79,7 +79,6 @@ stages:
             inputs:
               buildType: 'current'
               artifactName: 'manifests'
-              itemPattern: '##'
               targetPath: '$(Pipeline.Workspace)/manifests'
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
