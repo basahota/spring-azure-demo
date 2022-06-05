@@ -11,6 +11,7 @@ variables:
   imageProject: demo
   myApp: spring-azure-demo
   tag: '$(Build.BuildId)'
+  imagePullSecret: 'zhangchl008acr1646e01f-auth'
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 stages:
