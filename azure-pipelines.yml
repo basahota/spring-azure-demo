@@ -80,8 +80,8 @@ stages:
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               manifests: |
-                $(Pipeline.Workspace)/s/manifests/deployment.yml
-                $(Pipeline.Workspace)/s/manifests/service.yml
+                ./s/manifests/deployment.yml
+                ./s/manifests/service.yml
               containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
 
