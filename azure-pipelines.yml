@@ -41,5 +41,5 @@ stages:
         command: 'build'
         imageName: '$(imageRegistry)/$(imageRepo)/$(myApp):$(tag)'
         builder: 'paketobuildpacks/builder:base'
-        projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
+        projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar --publish'
         pullPolicy: 'always'
