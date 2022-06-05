@@ -34,5 +34,12 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.26.0/pack-v0.26.0-linux.tgz" | tar -C ./ --no-same-owner -xzv pack
-          ./pack build $(imageRepo)/$(myApp):$(tag) --builder paketobuildpacks/builder:base --publish --path ./target/spring-azure-demo-0.0.1-SNAPSHOT.jar
+          curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.26.0/pack-v0.26.0-linux.tgz" | tar -C ./usr/local/bin --no-same-owner -xzv pack
+    - task: BuildpacksTask@1
+      inputs:
+        command: 'build'
+        imageName: '$(imageRepo)/$(myApp)'
+        builder: 'paketobuildpacks/builder:base'
+        projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
+        pullPolicy: 'always'
+        tags: '$(tag)'
