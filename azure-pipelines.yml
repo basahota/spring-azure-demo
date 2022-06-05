@@ -24,6 +24,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Maven@3
+      displayName: Maven Build
       inputs:
         mavenPomFile: 'pom.xml'
         mavenOptions: '-Xmx3072m'
@@ -34,11 +35,13 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
     - task: Bash@3
+      displayName: buildpack installation
       inputs:
         targetType: 'inline'
         script: |
           curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.26.0/pack-v0.26.0-linux.tgz" | tar -C /usr/local/bin --no-same-owner -xzv pack
     - task: BuildpacksTask@1
+      displayName: Build Docker Images
       inputs:
         command: 'build'
         imageName: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
@@ -46,6 +49,7 @@ stages:
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
         pullPolicy: 'always'
     - task: Docker@2
+      displayName: Push Docker Image
       inputs:
         containerRegistry: 'zhangchl008acr'
         repository: '$(imageProject)/$(myApp)'
@@ -75,10 +79,6 @@ stages:
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'zhangchl008acr'
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: 'pwd && ls'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
