@@ -36,7 +36,7 @@ stages:
     - task: BuildpacksTask@1
       inputs:
         command: 'build'
-        imageName: '$(imageRepo)/${myApp}:${tag}'
+        imageName: '$(imageRepo)/$(myApp):$(tag)'
         builder: 'paketobuildpacks/builder:base'
         buildpacks: 'gcr.io/paketo-buildpacks/java-azure'
         envVariables: 'MAVEN_OPTS=-Xms256m -Xmx512m'
