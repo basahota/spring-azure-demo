@@ -7,8 +7,7 @@ trigger:
 - main
 
 variables:
-  imageRegistry: 'zhangchl008acr.azurecr.io'
-  imageRepo: demo
+  imageProject: demo
   tag: '$(Build.BuildId)'
   myApp: spring-azure-demo
 
@@ -39,8 +38,12 @@ stages:
     - task: BuildpacksTask@1
       inputs:
         command: 'build'
-        imageName: '$(imageRegistry)/$(imageRepo)/$(myApp):$(tag)'
+        imageName: '$(imageProject)/$(myApp):$(tag)'
         builder: 'paketobuildpacks/builder:base'
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
         pullPolicy: 'always'
-    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'zhangchl008acr'
+        repository: '$(imageProject)/$(myApp):$(tag)'
+        command: 'push'
