@@ -30,6 +30,9 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
+    - task: BuildpacksInstaller@1
+      inputs:
+        buildpacksVersion: '0.16.0'
     - task: BuildpacksTask@1
       inputs:
         command: 'build'
