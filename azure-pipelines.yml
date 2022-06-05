@@ -37,7 +37,7 @@ stages:
       inputs:
         command: 'build'
         imageName: '$(imageRepo)/$(myApp):$(tag)'
-        builder: 'heroku/buildpacks:18'
+        builder: 'paketobuildpacks/builder:base'
         envVariables: 'MAVEN_OPTS=-Xms256m -Xmx512m'
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
         pullPolicy: 'always'
