@@ -38,8 +38,7 @@ stages:
     - task: BuildpacksTask@1
       inputs:
         command: 'build'
-        imageName: '$(imageRepo)/$(myApp)'
+        imageName: '$(imageRepo)/$(myApp):$(tag)'
         builder: 'paketobuildpacks/builder:base'
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
         pullPolicy: 'always'
-        tags: '$(tag)'
