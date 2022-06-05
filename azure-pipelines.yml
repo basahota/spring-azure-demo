@@ -8,7 +8,6 @@ trigger:
 
 variables:
   imageProject: demo
-  tag: '$(Build.BuildId)'
   myApp: spring-azure-demo
 
 stages:
@@ -47,3 +46,4 @@ stages:
         containerRegistry: 'zhangchl008acr'
         repository: '$(imageProject)/$(myApp):$(tag)'
         command: 'push'
+        tags: '$(Build.BuildId)'
