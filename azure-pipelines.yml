@@ -92,7 +92,3 @@ stages:
                 $(Pipeline.Workspace)/manifests/service.yml
               containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
-
-
-
-  
