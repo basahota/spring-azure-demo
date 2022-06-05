@@ -73,10 +73,6 @@ stages:
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'zhangchl008acr'
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: 'find /home -name manifests'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
