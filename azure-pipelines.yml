@@ -11,6 +11,8 @@ variables:
   imageProject: demo
   myApp: spring-azure-demo
   tag: '$(Build.BuildId)'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 stages:
 - stage: Build 
   displayName: Build image
@@ -18,7 +20,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(vmImageName)
     steps:
     - task: Maven@3
       inputs:
@@ -42,12 +44,44 @@ stages:
         builder: 'paketobuildpacks/builder:base'
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
         pullPolicy: 'always'
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: 'docker images'
     - task: Docker@2
       inputs:
         containerRegistry: 'zhangchl008acr'
         repository: '$(imageProject)/$(myApp)'
         command: 'push'
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: 'spring-azure-demo'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              action: createSecret
+              secretName: $(imagePullSecret)
+              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              action: deploy
+              manifests: |
+                $(Pipeline.Workspace)/manifests/deployment.yml
+                $(Pipeline.Workspace)/manifests/service.yml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(imageRegistry)/$(imageProject)/$(myApp):$(tag)
+
+
+
+  
