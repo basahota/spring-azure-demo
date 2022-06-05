@@ -59,7 +59,7 @@ stages:
 - stage: Deploy
   displayName: Deploy stage
   variables:
-    k8simage: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
+    k8sImage: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
   dependsOn: Build
 
   jobs:
