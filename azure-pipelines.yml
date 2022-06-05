@@ -9,7 +9,7 @@ trigger:
 variables:
   imageRepo: demo
   tag: '$(Build.BuildId)'
-  myApp: myhello
+  myApp: spring-azure-demo
 
 stages:
 - stage: Build 
