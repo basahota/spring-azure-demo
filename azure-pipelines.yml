@@ -30,12 +30,9 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
-    - task: Bash@3
-      displayName: Buildpack installation
+    - task: BuildpacksInstaller@1
       inputs:
-        targetType: 'inline'
-        script: |
-          curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.26.0/pack-v0.26.0-linux.tgz" | tar -C /usr/local/bin --no-same-owner -xzv pack
+        buildpacksVersion: '0.26.0'
     - task: BuildpacksTask@1
       displayName: Buildpack Container Images
       inputs:
