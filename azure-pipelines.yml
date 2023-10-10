@@ -14,7 +14,7 @@ stages:
   - job: Build
     displayName: Build
     variables:
-      imageRegistry: quay.io'
+      imageRegistry: quay.io
       imageProject: zhangchl007
       myApp: spring-azure-demo
       tag: '$(Build.BuildId)'
