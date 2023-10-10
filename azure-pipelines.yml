@@ -7,6 +7,7 @@ trigger:
 - main
 pool:
   name: azure pipelines
+  imageName: Hosted Agent
 stages:
 - stage: Build 
   displayName: Build image
