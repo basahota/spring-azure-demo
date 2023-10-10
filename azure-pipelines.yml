@@ -5,23 +5,20 @@
 
 trigger:
 - main
-variables:
-  imageRegistry: quay.io'
-  imageProject: zhangchl007
-  myApp: spring-azure-demo
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'myquay1646e01f-auth'
-  # Agent VM image name
-  vmImageName: 'LAPTOP-42VA2297'
 pool:
   name: default
-  vmImage: $(vmImageName)
 stages:
 - stage: Build 
   displayName: Build image
   jobs:
   - job: Build
     displayName: Build
+    variables:
+      imageRegistry: quay.io'
+      imageProject: zhangchl007
+      myApp: spring-azure-demo
+      tag: '$(Build.BuildId)'
+      imagePullSecret: 'myquay1646e01f-auth'
     steps:
     - task: Maven@3
       displayName: Maven Build
