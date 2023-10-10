@@ -6,7 +6,7 @@
 trigger:
 - main
 pool:
-  name: default
+  imageName: ubuntu:latest
 stages:
 - stage: Build 
   displayName: Build image
