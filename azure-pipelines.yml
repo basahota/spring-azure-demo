@@ -5,6 +5,8 @@
 
 trigger:
 - main
+pool:
+  vmImage: 'ubuntu-latest'
 stages:
 - stage: Build 
   displayName: Build image
@@ -24,7 +26,7 @@ stages:
         mavenPomFile: 'pom.xml'
         mavenOptions: '-Xmx3072m'
         javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
+        jdkVersionOption: '1.8'
         jdkArchitectureOption: 'x64'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
