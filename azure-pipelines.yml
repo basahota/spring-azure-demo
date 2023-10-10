@@ -75,10 +75,8 @@ stages:
           - task: KubernetesManifest@1
             inputs:
               action: 'deploy'
-              connectionType: 'azureResourceManager'
-              azureSubscriptionConnection: 'myazure'
-              azureResourceGroup: 'rg-aks-demo'
-              kubernetesCluster: 'aks-devops-demo'
+              connectionType: 'kubernetesServiceConnection'
+              kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
