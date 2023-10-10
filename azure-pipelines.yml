@@ -21,6 +21,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
+      name: default
       vmImage: $(vmImageName)
     steps:
     - task: Maven@3
@@ -66,6 +67,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
+      name: default
       vmImage: $(vmImageName)
     environment: 'spring-azure-demo'
     strategy:
