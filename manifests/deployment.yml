@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: springazuredemo 
-          image: zhangchl008acr.azurecr.io/demo/spring-azure-demo
+          image: docker.io/zhangchl007/spring-azure-demo
           ports:
           - containerPort: 80
