@@ -81,11 +81,13 @@ stages:
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'zhangchl008acr'
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
+          - task: KubernetesManifest@1
             inputs:
               action: 'deploy'
-              kubernetesServiceConnection: 'mydemo_aks'
+              connectionType: 'azureResourceManager'
+              azureSubscriptionConnection: 'myazure'
+              azureResourceGroup: 'rg-aks-demo'
+              kubernetesCluster: 'aks-devops-demo'
               namespace: 'default'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
