@@ -7,8 +7,8 @@ trigger:
 - main
 
 variables:
-  imageRegistry: 'zhangchl008acr.azurecr.io'
-  imageProject: demo
+  imageRegistry: quay.io'
+  imageProject: zhangchl007
   myApp: spring-azure-demo
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myquay1646e01f-auth'
@@ -80,7 +80,7 @@ stages:
               namespace: 'default'
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
-              dockerRegistryEndpoint: 'zhangchl008acr'
+              dockerRegistryEndpoint: 'myquay'
           - task: KubernetesManifest@1
             inputs:
               action: 'deploy'
