@@ -18,7 +18,6 @@ stages:
       imageProject: zhangchl007
       myApp: spring-azure-demo
       tag: '$(Build.BuildId)'
-      imagePullSecret: 'mydockersecret'
     steps:
     - task: Maven@4
       inputs:
@@ -53,6 +52,7 @@ stages:
   displayName: Deploy stage
   variables:
     k8sImage: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
+    imagePullSecret: 'mydockersecret'
   dependsOn: Build
 
   jobs:
@@ -70,7 +70,7 @@ stages:
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               secretType: 'dockerRegistry'
-              secretName: "$(imagePullSecret)"
+              secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'mydockerhub'
           - task: KubernetesManifest@1
             inputs:
@@ -84,4 +84,4 @@ stages:
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
               containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
-              imagePullSecrets: "$(imagePullSecret)"
+              imagePullSecrets: '$(imagePullSecret)'
