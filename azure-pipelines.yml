@@ -6,7 +6,7 @@
 trigger:
 - main
 pool:
-  vmImage: 'ubuntu-latest'
+  name: default
 stages:
 - stage: Build 
   displayName: Build image
