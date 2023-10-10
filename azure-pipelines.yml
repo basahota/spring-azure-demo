@@ -18,7 +18,7 @@ stages:
       imageProject: zhangchl007
       myApp: spring-azure-demo
       tag: '$(Build.BuildId)'
-      imagePullSecret: 'docker.io-secret'
+      imagePullSecret: 'mydockersecret'
     steps:
     - task: Maven@4
       inputs:
@@ -70,7 +70,7 @@ stages:
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               secretType: 'dockerRegistry'
-              secretName: '$(imagePullSecret)'
+              secretName: "$(imagePullSecret)"
               dockerRegistryEndpoint: 'mydockerhub'
           - task: KubernetesManifest@1
             inputs:
@@ -84,4 +84,4 @@ stages:
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
               containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
-              imagePullSecrets: '$(imagePullSecret)'
+              imagePullSecrets: "$(imagePullSecret)"
