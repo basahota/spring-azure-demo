@@ -18,7 +18,7 @@ stages:
       imageProject: zhangchl007
       myApp: spring-azure-demo
       tag: '$(Build.BuildId)'
-      imagePullSecret: 'myquay1646e01f-auth'
+      imagePullSecret: 'mydockersecret'
     steps:
     - task: Maven@4
       inputs:
