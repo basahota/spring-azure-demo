@@ -5,8 +5,6 @@
 
 trigger:
 - main
-pool:
-  imageName: ubuntu:latest
 stages:
 - stage: Build 
   displayName: Build image
