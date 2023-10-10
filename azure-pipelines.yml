@@ -13,7 +13,7 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myquay1646e01f-auth'
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'LAPTOP-42VA2297'
 stages:
 - stage: Build 
   displayName: Build image
@@ -21,7 +21,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      name: azure pipelines
+      name: default
       vmImage: $(vmImageName)
     steps:
     - task: Maven@3
@@ -67,7 +67,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      name: azure pipelines
+      name: default
       vmImage: $(vmImageName)
     environment: 'spring-azure-demo'
     strategy:
