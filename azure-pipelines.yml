@@ -6,7 +6,7 @@
 trigger:
 - main
 pool:
-  name: default
+  name: azure pipelines
 stages:
 - stage: Build 
   displayName: Build image
