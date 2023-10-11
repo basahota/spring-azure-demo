@@ -78,7 +78,7 @@ stages:
               connectionType: 'Kubernetes Service Connection'
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
-              command: 'install'
+              command: 'upgrade'
               chartType: 'FilePath'
               chartPath: deploy/springazuredemo
               chartName: 'springazuredemo'
