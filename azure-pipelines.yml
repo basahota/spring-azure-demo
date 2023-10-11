@@ -72,14 +72,14 @@ stages:
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'mydockerhub'
-          - task: KubernetesManifest@1
+          - task: HelmDeploy@0
             inputs:
-              action: 'deploy'
-              connectionType: 'kubernetesServiceConnection'
+              connectionType: 'Kubernetes Service Connection'
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
-              manifests: |
-                $(Pipeline.Workspace)/deploy/manifests/deployment.yml
-                $(Pipeline.Workspace)/deploy/manifests/service.yml
-              containers: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
-              imagePullSecrets: '$(imagePullSecret)'
+              command: 'install'
+              chartType: 'Name'
+              chartName: 'springazuredemo'
+              chartVersion: '0.1.0'
+              releaseName: 'springazuredemo'
+              overrideValues: 'image.tag=$(tag)'
