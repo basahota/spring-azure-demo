@@ -53,6 +53,7 @@ stages:
   variables:
     k8sImage: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
     imagePullSecret: 'mydockersecret'
+    tag: '$(Build.BuildId)'
   dependsOn: Build
 
   jobs:
@@ -78,7 +79,8 @@ stages:
               kubernetesServiceConnection: 'mydemo_aks'
               namespace: 'default'
               command: 'install'
-              chartType: 'Name'
+              chartType: 'FilePath'
+              chartPath: deploy/springazuredemo
               chartName: 'springazuredemo'
               chartVersion: '0.1.0'
               releaseName: 'springazuredemo'
