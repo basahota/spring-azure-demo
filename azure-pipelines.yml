@@ -46,8 +46,8 @@ stages:
         containerRegistry: 'mydockerhub'
         repository: '$(imageProject)/$(myApp)'
         command: 'push'
-    - upload: manifests
-      artifact: manifests
+    - upload: deploy/manifests
+      artifact: deploy/manifests
 - stage: Deploy
   displayName: Deploy stage
   variables:
