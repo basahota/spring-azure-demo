@@ -39,7 +39,7 @@ stages:
         imageName: '$(imageRegistry)/$(imageProject)/$(myApp):$(tag)'
         builder: 'paketobuildpacks/builder:base'
         projectPath: 'target/spring-azure-demo-0.0.1-SNAPSHOT.jar'
-        pullPolicy: 'always'
+        pullPolicy: 'if-not-present'
     - task: Docker@2
       displayName: Push Container Image
       inputs:
